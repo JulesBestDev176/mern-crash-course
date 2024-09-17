@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import productRoute from "./routes/product.route.js";
 import path from "path";
+import helmet from "helmet";
 
 dotenv.config();
 
@@ -11,8 +12,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
-
-const helmet = require("helmet");
 
 // Utilisation de helmet avec des directives personnalisées
 app.use(
