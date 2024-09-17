@@ -12,6 +12,22 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
+const helmet = require("helmet");
+
+// Utilisation de helmet avec des directives personnalisées
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-eval'"], // Si nécessaire
+        imgSrc: ["'self'", "data:"],
+        // Ajoute d'autres directives si besoin
+      },
+    },
+  })
+);
+
 app.use(express.json()); // allows us to accept JSON data in the body
 
 app.use("/api/products", productRoute);
