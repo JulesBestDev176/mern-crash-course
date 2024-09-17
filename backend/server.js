@@ -18,10 +18,14 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-eval'"], // Si nécessaire
-        imgSrc: ["'self'", "data:"],
-        // Ajoute d'autres directives si besoin
+        defaultSrc: ["'self'"], // Autorise les ressources provenant de ton domaine
+        scriptSrc: ["'self'", "'unsafe-eval'"], // Évite d'utiliser 'unsafe-eval' si possible
+        imgSrc: ["'self'", "data:"], // Permet les images locales et celles encodées en base64
+        styleSrc: ["'self'", "'unsafe-inline'"], // Autorise le style inline si nécessaire
+        connectSrc: ["'self'", "https://example.com"], // Autorise les connexions AJAX vers ton API
+        fontSrc: ["'self'", "https://fonts.googleapis.com"], // Permet de charger des polices externes
+        frameAncestors: ["'self'"], // Empêche le framing par d'autres sites
+        upgradeInsecureRequests: [], // Force l'utilisation de HTTPS
       },
     },
   })
